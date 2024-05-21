@@ -19,19 +19,19 @@ run_at_startup = debug_mode == 'True'                   # This way the function 
 @app.schedule(schedule="0 0 11 * * *", arg_name="myTimer", run_on_startup=run_at_startup,
               use_monitor=False) 
 def CS2ContainerPrune(myTimer: func.TimerRequest) -> None:
-    if myTimer.past_due:
-        # Convert current UTC time to EST
-        current_time = datetime.now(pytz.timezone('US/Eastern')).time()
+    # if myTimer.past_due:
+    #     # Convert current UTC time to EST
+    #     current_time = datetime.now(pytz.timezone('US/Eastern')).time()
 
-        # Define the time range
-        start_time = time(6, 0)  # 6:00 AM
-        end_time = time(13, 0)  # 1:00 PM
-        logging.info('The timer is past due!')
+    #     # Define the time range
+    #     start_time = time(6, 0)  # 6:00 AM
+    #     end_time = time(13, 0)  # 1:00 PM
+    #     logging.info('The timer is past due!')
 
-        # Check if the current time outside the time range
-        if current_time < start_time or current_time > end_time:
-            logging.info('The timer is not within the time range. Exiting the function.')
-            return
+    #     # Check if the current time outside the time range
+    #     if current_time < start_time or current_time > end_time:
+    #         logging.info('The timer is not within the time range. Exiting the function.')
+    #         return
 
     # Authenticate and create a client
     credentials = DefaultAzureCredential(
