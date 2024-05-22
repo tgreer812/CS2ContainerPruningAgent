@@ -16,7 +16,13 @@ res_group_name = os.getenv('RESOURCE_GROUP_NAME')
 debug_mode = os.getenv('DEBUG_MODE')
 run_at_startup = debug_mode == 'True'                   # This way the function runs when testing locally but not in production
 
-@app.schedule(schedule="0 0 11 * * *", arg_name="myTimer", run_on_startup=run_at_startup,
+# make the schedule
+#sched = "0 0 11 * * *"  # 11:00 AM UTC --> 6:00 AM EST
+
+# Test schedule - run every minute
+sched = "0 * * * * *"
+
+@app.schedule(schedule=sched, arg_name="myTimer", run_on_startup=run_at_startup,
               use_monitor=False) 
 def CS2ContainerPrune(myTimer: func.TimerRequest) -> None:
     # if myTimer.past_due:
